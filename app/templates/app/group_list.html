@@ -1,0 +1,63 @@
+{% extends "app/base.html" %}
+{% load staticfiles %}
+
+
+
+   <h1 class="page-header">Группы </h1>
+{% load edit_tags%}
+{% block content %}
+
+   <h1 class="page-header">Группы </h1>
+
+   <a class='btn btn-primary js-create-group' href="{% url 'group-create' %}">Добавить</a> 	
+		   		
+   <div class = "container">
+   	<table class="table">
+
+   		<thead>
+   			<tr>
+   				<th>Название группы</th>
+   				<th>Имя старосты</th>
+   				<th></th>
+   				<th></th>
+   			
+   				
+   			</tr>
+
+   		</thead>
+
+   		<tbody>
+   		{% for group in groups %}
+   			<tr>
+   				<td style = "width:100px">
+   					<a href="{% url 'student-list' pk=group.id%}">{{ group.name }}</a>
+   				</td>
+   				<td style = "width:100px">
+   					{{ group.monitor}}
+   				</td>
+		   		
+   				<td style ="width:50px"> 
+   				<form method="POST" action="{% url 'group-delete'  pk=group.id %}">
+   					{% csrf_token %}<input class ='btn btn-danger' type="submit" value="Удалить">
+				</form>  					
+   					</td>
+   				<td style ="width:50px">   					
+   					<a class='btn btn-default' href="{% url 'group-edit' pk=group.id %}">Редактировать</a> 	
+		   		</td>
+   			</tr>
+   		{% endfor %}
+   		</tbody>
+
+   	</table>
+ <a class='btn btn-default' href='/logout/?next=/login'">Выйти</a>    
+
+   
+   </div>
+
+   
+{% endblock content %}
+
+
+
+
+

@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Логин{% endblock %}
+
+<div class='contrainer'>
+	
+	{% block content %}
+  <h2>Авторизация</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Войти</button>
+  </form>
+{% endblock %}
+
+
+</div>

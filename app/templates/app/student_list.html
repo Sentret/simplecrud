@@ -1,0 +1,56 @@
+{% extends "app/base.html" %}
+{% block content %}
+
+   <h1 class="page-header">Студенты</h1>
+
+
+   <a class='btn btn-primary' href="{% url 'student-create' pk=pk %}">Добавить</a> 	
+		   		
+   <div class = "container">
+   	<table class="table">
+
+   		<thead>
+   			<tr>
+   				<th>Имя</th>
+   				<th>Фамилия</th>
+   				<th></th>
+   				<th></th>   				
+   			</tr>
+   		</thead>
+
+   		<tbody>
+   		{% for student in query %}
+   			<tr>
+   				<td style = "width:100px">
+   					{{ student.firstname }}
+   				</td>
+   				<td style = "width:100px">
+   					{{ student.lastname}}
+   				</td>
+		   		
+   				<td style ="width:50px"> 
+   				<form method="POST" action="{% url 'student-delete'  group_pk=student.group.id pk=student.id %}">
+   					{% csrf_token %}<input class ='btn btn-danger' type="submit" value="Удалить">
+				</form>  					
+   					</td>
+                  <td style ="width:50px">                  
+                  <a class='btn btn-default' href="{% url 'student-edit' pk=student.id %}">Редактировать</a>    
+               </td>
+   				
+   			</tr>
+   		{% endfor %}
+   		</tbody>
+
+   	</table>
+    <a class='btn btn-default' href='/logout/?next=/login'">Выйти</a>    
+
+   </div>
+
+    <div class="modal fade" id="modal-book">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+
+{% endblock content %}
+
